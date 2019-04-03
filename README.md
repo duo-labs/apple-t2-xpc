@@ -26,7 +26,7 @@ run this from the project directory:
 #### pip3 stuff
 
 To install, you will need to install:
-```pip3 install Twisted hexdump scapy```
+```pip3 install -r requirements.txt```
 
 #### h2 module
 
