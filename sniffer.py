@@ -52,7 +52,10 @@ def main():
 
 
 def process_packet(p):
-    m = MBIM(p)
+    try:
+        m = MBIM(p)
+    except:
+        return
     print("New MBIM packet with %d Ethernet frames inside" % len(m))
     for packet in m:
         #if DEBUG: packet.show()

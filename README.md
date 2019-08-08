@@ -41,4 +41,34 @@ There are currently two main utilities contained in this repo:
 - `vhc128sniff.py` will listen on the VHC128 interface and decode as many XPC messages as it can between the t2 chip and the mac. It can also be run with the `-f` flag and a file path to read from a tcpdump-format packet capture.
 - `sysdiagnose_client.py` will attempt to connect to the t2 chip and initiate a sysdiagnose connection.
 
+### Update: getting `remotectl` working again
+
+```
+csrutil disable # (in recovery)
+```
+
+```
+nvram boot-args=”amfi_get_out_of_my_way=0x01” # (reboot) 
+```
+
+```
+cp /usr/libexec/remotectl /tmp/
+
+cat << EOF > /tmp/entitlements.ent 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.private.RemoteServiceDiscovery.device-admin</key>
+	<true/>
+	<key>com.apple.private.network.intcoproc.restricted</key>
+	<true/>
+</dict>
+</plist>
+EOF
+
+jtool --sign --ent /tmp/entitlements.ent --inplace /tmp/remotectl
+
+/tmp/remotectl relay localbridge com.apple.sysdiagnose.remote
+```
 
