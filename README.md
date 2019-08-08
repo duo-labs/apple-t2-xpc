@@ -1,5 +1,4 @@
-# judgment-day
-
+# Apple T2 XPC
 This project is an exploration of the network communications between macOS and
 the T2 chip. It can be used to decode and print the XPC messages, and provides
 an example of building a protocol-compliant client to communicate with a
@@ -27,7 +26,7 @@ run this from the project directory:
 #### pip3 stuff
 
 To install, you will need to install:
-```pip3 install Twisted hexdump scapy```
+```pip3 install -r requirements.txt```
 
 #### h2 module
 
